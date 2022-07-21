@@ -1348,7 +1348,7 @@ icValidateStatus CIccMatrix::Validate(icTagTypeSignature sig, std::string &sRepo
       for (int i=0; i<9; i++) {
         sum += m_e[i];
       }
-      if (m_e[0]!=1.0 || m_e[4]!=1.0 || m_e[9]!=1.0 || sum!=3.0) {
+      if (m_e[0]!=1.0 || m_e[4]!=1.0 || m_e[8]!=1.0 || sum!=3.0) {
         sReport += icValidateNonCompliantMsg;
         sReport += sSigName;
         sReport += " - Matrix must be identity.\r\n";
