@@ -60,6 +60,8 @@ BUILDING SampleICC
 Mac OS X users, see README.OSX for build details.
 
 As one might expect, on GNU/Linux or other UNIX-like systems, a simple
+	autoreconf --install
+	autoconf
         ./configure
         make
         make install
