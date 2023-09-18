@@ -1,0 +1,25 @@
+name: C++ CI
+
+on:
+  push:
+    branches: [ "master", "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -yq \
+        build-essential autotools-dev autoconf libtool \
+        libtiff-dev
+    - name: configure, build
+      run: |
+        autoreconf --install
+        autoconf
+        ./configure
+        make
