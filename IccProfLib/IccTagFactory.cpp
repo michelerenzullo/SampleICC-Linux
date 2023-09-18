@@ -492,7 +492,6 @@ const icChar* CIccSpecTagFactory::GetTagTypeSigName(icTagTypeSignature tagSig)
   return NULL;
 }
 
-std::auto_ptr<CIccTagCreator> CIccTagCreator::theTagCreator;
 
 CIccTagCreator::~CIccTagCreator()
 {
@@ -506,13 +505,13 @@ CIccTagCreator::~CIccTagCreator()
 
 CIccTagCreator* CIccTagCreator::GetInstance()
 {
-  if (!theTagCreator.get()) {
-    theTagCreator = CIccTagCreatorPtr(new CIccTagCreator);
-
-    theTagCreator->DoPushFactory(new CIccSpecTagFactory);
+  static bool init = false;
+  static CIccTagCreator obj;
+  if (!init) {
+    obj.DoPushFactory(new CIccSpecTagFactory);
+    init = true;
   }
-
-  return theTagCreator.get();
+  return &obj;
 }
 
 CIccTag* CIccTagCreator::DoCreateTag(icTagTypeSignature tagTypeSig)

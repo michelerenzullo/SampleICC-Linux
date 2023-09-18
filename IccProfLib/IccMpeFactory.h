@@ -181,7 +181,6 @@ public:
 
 class CIccMpeCreator;
 
-typedef std::auto_ptr<CIccMpeCreator> CIccMpeCreatorPtr;
 
 /**
  ***********************************************************************
@@ -283,8 +282,6 @@ private:
   bool DoGetElementSigName(std::string &elemName, icElemTypeSignature elemTypeSig);
   void DoPushFactory(IIccMpeFactory *pFactory);
   IIccMpeFactory* DoPopFactory(bool bAll=false);
-
-  static CIccMpeCreatorPtr theElementCreator; 
 
   CIccMpeFactoryList factoryStack;
 };

@@ -153,8 +153,6 @@ public:
 
 class CIccXformCreator;
 
-typedef std::auto_ptr<CIccXformCreator> CIccXformCreatorPtr;
-
 /**
  ***********************************************************************
  * Class: CIccXformCreator
@@ -235,8 +233,6 @@ private:
   CIccXform* DoCreateXform(icXformType xformType, CIccTag *pTag=NULL, CIccCreateXformHintManager *pHintManager=NULL);
   void DoPushFactory(IIccXformFactory *pFactory);
   IIccXformFactory* DoPopFactory(bool bAll=false);
-
-  static CIccXformCreatorPtr theXformCreator; 
 
   CIccXformFactoryList factoryStack;
 };

@@ -112,8 +112,6 @@ CIccXform* CIccBaseXformFactory::CreateXform(icXformType xformSig, CIccTag *pTag
   }
 }
 
-std::auto_ptr<CIccXformCreator> CIccXformCreator::theXformCreator;
-
 CIccXformCreator::~CIccXformCreator()
 {
   IIccXformFactory *pFactory = DoPopFactory(true);
@@ -126,13 +124,13 @@ CIccXformCreator::~CIccXformCreator()
 
 CIccXformCreator* CIccXformCreator::GetInstance()
 {
-  if (!theXformCreator.get()) {
-    theXformCreator = CIccXformCreatorPtr(new CIccXformCreator);
-
-    theXformCreator->DoPushFactory(new CIccBaseXformFactory);
+  static bool init = false;
+  static CIccXformCreator obj;
+  if (!init) {
+    obj.DoPushFactory(new CIccBaseXformFactory);
+    init = true;
   }
-
-  return theXformCreator.get();
+  return &obj;
 }
 
 CIccXform* CIccXformCreator::DoCreateXform(icXformType xformTypeSig, CIccTag *pTag/*=NULL*/, CIccCreateXformHintManager *pHintManager/*=NULL*/)

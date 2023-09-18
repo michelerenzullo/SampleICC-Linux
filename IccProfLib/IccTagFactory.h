@@ -200,7 +200,6 @@ public:
 
 class CIccTagCreator;
 
-typedef std::auto_ptr<CIccTagCreator> CIccTagCreatorPtr;
 
 /**
  ***********************************************************************
@@ -309,8 +308,6 @@ private:
   const icChar *DoGetTagTypeSigName(icTagTypeSignature tagTypeSig);
   void DoPushFactory(IIccTagFactory *pFactory);
   IIccTagFactory* DoPopFactory(bool bAll=false);
-
-  static CIccTagCreatorPtr theTagCreator; 
 
   CIccTagFactoryList factoryStack;
 };
