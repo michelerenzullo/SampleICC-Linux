@@ -126,7 +126,6 @@ bool CIccBasicMpeFactory::GetElementSigName(std::string &elemName, icElemTypeSig
   return true;
 }
 
-std::auto_ptr<CIccMpeCreator> CIccMpeCreator::theElementCreator;
 
 CIccMpeCreator::~CIccMpeCreator()
 {
@@ -140,13 +139,13 @@ CIccMpeCreator::~CIccMpeCreator()
 
 CIccMpeCreator* CIccMpeCreator::GetInstance()
 {
-  if (!theElementCreator.get()) {
-    theElementCreator = CIccMpeCreatorPtr(new CIccMpeCreator);
-
-    theElementCreator->DoPushFactory(new CIccBasicMpeFactory);
+  static bool init = false;
+  static CIccMpeCreator obj;
+  if (!init) {
+    obj.DoPushFactory(new CIccBasicMpeFactory);
+    init = true;
   }
-
-  return theElementCreator.get();
+  return &obj;
 }
 
 CIccMultiProcessElement* CIccMpeCreator::DoCreateElement(icElemTypeSignature elemTypeSig)

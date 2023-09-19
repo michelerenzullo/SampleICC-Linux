@@ -67,6 +67,7 @@
 // -Initial implementation by Max Derhak 5-15-2003
 //
 //////////////////////////////////////////////////////////////////////
+#include <cstdint>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -156,8 +157,8 @@ bool CTiffImg::Create(const char *szFname, unsigned long nWidth, unsigned long n
     TIFFError(szFname,"Can not open output image");
     return false;
   }
-  TIFFSetField(m_hTif, TIFFTAG_IMAGEWIDTH, (uint32) m_nWidth);
-  TIFFSetField(m_hTif, TIFFTAG_IMAGELENGTH, (uint32) m_nHeight);
+  TIFFSetField(m_hTif, TIFFTAG_IMAGEWIDTH, (uint32_t) m_nWidth);
+  TIFFSetField(m_hTif, TIFFTAG_IMAGELENGTH, (uint32_t) m_nHeight);
   TIFFSetField(m_hTif, TIFFTAG_PHOTOMETRIC, m_nPhoto);
   TIFFSetField(m_hTif, TIFFTAG_PLANARCONFIG, PLANARCONFIG_CONTIG);
   TIFFSetField(m_hTif, TIFFTAG_SAMPLESPERPIXEL, m_nSamples);

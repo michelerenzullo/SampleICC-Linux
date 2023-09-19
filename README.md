@@ -8,6 +8,8 @@ I m using it in a simple project where size and performance are crucial so other
 Therefore I've been made a few commits to make it compile correctly also on Linux, the main change is remove the carriage return with dos2unix and copy a couple of missing files
 `find . -type f -print0 | xargs -0 dos2unix -ic0 | xargs -0 dos2unix -b`
 
+This has also dropped std::auto_ptr for compatability for C++ 17 which removed that feature - internal usage of auto_ptr was restricted to simple singleton impl lifetime management
+
 After clone:
  ```
 autoreconf -i
